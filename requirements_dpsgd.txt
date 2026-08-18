@@ -1,0 +1,14 @@
+# DP-SGD training environment ("mia_dpsgd") -- used ONLY for train_dpsgd.py.
+# Isolated from requirements.txt's torch build to avoid a dual-cuDNN
+# conflict introduced by opacus. Evaluation of the resulting checkpoints
+# (evaluate_dime.py, evaluate.py) uses the MAIN environment instead, since
+# the saved checkpoint is a plain state_dict and doesn't need opacus.
+#
+# PyTorch requires the CUDA-specific extra index; install with:
+#   pip install -r requirements-dpsgd.txt --extra-index-url https://download.pytorch.org/whl/cu124
+
+torch==2.6.0+cu124
+torchvision
+opacus==1.6.0
+numpy
+scikit-learn
