@@ -1,16 +1,5 @@
 """
-Creates the member/held-out split for STL10-U or CelebA, matching SimA's
-stated split SIZES via this project's own reproducible make_member_split() --
-no pre-made SecMI/SimA split file exists for these two datasets (unlike
-CIFAR-10/100), so there is nothing external to convert/match.
-
-IMPORTANT: n_member defaults below are SimA's STATED split sizes (from their
-README's DDPM table), NOT n_total // 2. For STL10-U these happen to coincide
-(50k/50k, and the full unlabeled pool is 100k, so half = 50k). For CelebA they
-do NOT coincide -- SimA's split is 30k/30k, but CelebA's official train split
-is 162,770 images, so n_total // 2 would wrongly give ~81k/81k. Always pass
---n_member explicitly if you want anything other than SimA's stated size, and
-never rely on make_member_split's own n_total // 2 default for CelebA.
+Creates the member/held-out split for STL10-U or CelebA
 
 Usage:
     python make_split.py --dataset stl10u --out_path ./data/stl10u_split.npz
