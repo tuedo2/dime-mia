@@ -1,7 +1,5 @@
 """
-Dedicated data loading for the Guided Diffusion / ImageNet-1k experiment --
-rewritten to match SimA's ACTUAL INv2_attack.py exactly (confirmed by
-reading their real source), not guesswork.
+Dedicated data loading for the Guided Diffusion / ImageNet-1k experiment 
 
 Key confirmed facts from their code:
   - STRATIFIED sampling: exactly n=3 images per class (sample_per_class),
