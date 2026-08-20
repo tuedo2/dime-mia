@@ -1,20 +1,5 @@
 """
-Full evaluation harness, all methods, PLUS all four LRT variants: Gaussian A/B
-(existing) and Laplace/median A/B (new, robust-to-outliers -- see
-lrt_laplace_centered_addition.py's docstring for the motivation, directly
-targeting the mechanism identified in outlier_crowding_diagnostic.py).
-
-Uses this project's ORIGINAL, standard TPR@1%FPR convention (member=1=positive
-class) throughout -- NOT SimA's inverted convention. This is deliberate: we
-confirmed via SecMI's own released roc() function, and via independent
-corroboration from the PIA paper's Table 2, that the standard convention is
-both the field's actual norm and the one that reproduces published numbers
-from the SAME checkpoint lineage. See the project's SimA-discrepancy
-investigation for the full evidence chain.
-
-Same rigorous held-out calibration-split protocol as evaluate_tpr_calibrated.py
-(NOT SimA's no-split protocol) -- calibrated by TPR@1%FPR on a validation
-half, reported once on a disjoint test half.
+Full evaluation harness, all methods
 
 Usage:
     python evaluate.py --checkpoint checkpoints/secmi_cifar10.pt \
