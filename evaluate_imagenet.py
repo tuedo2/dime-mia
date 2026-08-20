@@ -2,9 +2,7 @@
 Evaluation for the Guided Diffusion / ImageNet-1k experiment -- matches
 SimA's ACTUAL INv2_attack.py (confirmed from their real source): class-
 conditional checkpoint, stratified n-per-class sampling, Resize(BICUBIC)+
-CenterCrop preprocessing, labels passed to every query. Full method suite,
-matching Table 3's structure: Loss, PIA, SimA, SimA-MC (mc=10/30),
-SecMI_stat, LRT-B, LRT+Shape (q_ref=1 and a multi-query variant).
+CenterCrop preprocessing, labels passed to every query.
 
 Usage:
     python evaluate_imagenet.py \
