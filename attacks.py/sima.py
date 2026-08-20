@@ -1,38 +1,6 @@
 """
 SimA / SimA-MC (the paper this whole project is replicating/comparing against).
 
-IMPORTANT: the paper's Eq. 1 states A(x,t) = ||eps_theta(x_t,t)||_p with
-x_t = sqrt(abar_t)x* + sqrt(1-abar_t)*eps -- a NOISED query. We initially
-implemented it that way. But the actual official code (mx-ethan-rao/SimA,
-DDPM/components.py, class SimA.ddim_reverse) queries the model on the RAW,
-UNSCALED clean image directly:
-    eps = self.eps_getter(x0, condition, self.noise_level, step)   # x0, not x_t!
-No noise, no sqrt(abar_t) scaling -- just model(x0, t=step). This is a real
-deviation from both the paper's formula AND its own prose (Section 4.2 calls
-SimA a "point estimate (eps=0)", which would still imply sqrt(abar_t)*x0, not
-raw x0). Confirmed by direct inspection of their repo, not inferred. We match
-their actual code here since the goal is reproducing their reported numbers.
-Confirmed working: matches the paper's reported ASR/AUC almost exactly on the
-real checkpoint (83.60/90.43 vs their 83.69/90.23).
-
-SimA-MC: a SECOND real discrepancy found here, distinct from the above. Their
-SimA_MC.ddim_reverse averages the noise-prediction VECTORS across the n_mc
-noisy queries FIRST, then the distance() function takes ONE norm of that
-averaged vector:
-    eps_accum = torch.randn_like(x0)          # (unrelated init quirk, not replicated)
-    for _ in range(n_mc):
-        eps_accum += eps_theta(get_xt(x0, step, eps), step)   # summing VECTORS
-    eps_accum /= n_mc
-    # distance() then takes ONE norm of eps_accum
-This is NOT what the paper's own Eq. 13 states (sum of norms, i.e. norm computed
-per-draw then averaged) -- another code-vs-prose mismatch, and we match the code
-since that's what produced their reported numbers. This matters a lot: averaging
-VECTORS first lets independent per-draw noise cancel out (the same mechanism
-that makes our own LRT's Tbar construction work), which is why their reported
-AUC climbs with more MC samples. Averaging norms (our original, wrong,
-implementation) doesn't get this cancellation and can actually get WORSE with
-more samples -- confirmed: it was scoring below even the single-query SimA.
-
 Paper finds l4 norm performs best in general (Fig. 3 ablation); default p=4
 here, l2 available via the p argument for direct comparison.
 Smaller A => more member-like (Eq. 12's decision rule).
