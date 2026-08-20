@@ -10,16 +10,6 @@ Now dataset-agnostic (CIFAR-10 / CIFAR-100) via --dataset, matching the
 generalization already applied to evaluate.py/quick_eval_check.py. See data.py's
 DATASET_REGISTRY for what's supported.
 
-The paper trains for a large number of steps (SecMI's default: 800,001) -- this
-is multiple GPU-days even on an A100, and will NOT fit in a 6-hour single-A40
-budget at the standard step count. See --benchmark_only below to get a real
-steps/sec number for YOUR cluster before committing SLURM walltime, rather than
-trusting a literature-based estimate.
-
-Throughput optimizations enabled by default: AMP (bf16 autocast), channels_last
-memory format. torch.compile is optional (--compile) since first-call compile
-overhead can dominate short benchmark runs.
-
 Usage:
     # Step 1: measure real throughput on your actual node (few minutes):
     python train.py --data_root ./data --logdir ./logs/cifar10_ddpm \
