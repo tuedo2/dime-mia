@@ -293,7 +293,7 @@
     <h2>Reconstruction is retrieval</h2>
     <div class="idea-grid">
       <figure>
-        <img src="assets/bias_crowding_explainer.png" alt="Three panels showing an isolated member, an isolated non-member, and a crowded non-member, with their local mean and nearby training points marked">
+        <img src="bias_crowding_explainer.png" alt="Three panels showing an isolated member, an isolated non-member, and a crowded non-member, with their local mean and nearby training points marked">
         <figcaption>The optimal denoiser reconstructs a candidate as a posterior-weighted average of nearby training points. An isolated member is reconstructed almost exactly by itself (small bias, low crowding). An isolated non-member sits far from every training point (large bias). A crowded non-member can land near the mean of several separated training points, giving small bias by coincidence &mdash; what exposes it is high crowding, which DIME measures directly.</figcaption>
       </figure>
       <div class="idea-text">
@@ -330,19 +330,19 @@
     <div class="results-grid">
 
       <div class="result-card">
-        <img src="assets/score_distributions.png" alt="Histograms of DIME scores for member and hold-out sets across CIFAR10, CIFAR100, STL10-U, CelebA, and ImageNet">
+        <img src="score_distributions.png" alt="Histograms of DIME scores for member and hold-out sets across CIFAR10, CIFAR100, STL10-U, CelebA, and ImageNet">
         <h3>Score separation</h3>
         <p>DIME scores for members and hold-out data separate cleanly across every dataset tested, with the gap between distributions driving the low-false-positive gains over prior attacks.</p>
       </div>
 
       <div class="result-card">
-        <img src="assets/bias_variance_decomposition.png" alt="Bias squared, variance, and their sum plotted over timestep for member, biased non-member, and crowded non-member candidates">
+        <img src="bias_variance_decomposition.png" alt="Bias squared, variance, and their sum plotted over timestep for member, biased non-member, and crowded non-member candidates">
         <h3>Bias, crowding, and their sum</h3>
         <p>On synthetic data, a crowded non-member can have small bias like a true member, but its variance rises much earlier &mdash; the sum recovers a clean separation that bias alone would miss.</p>
       </div>
 
       <div class="result-card">
-        <img src="assets/timestep_stability.png" alt="AUC and attack success rate as a function of timestep t for CIFAR10, CIFAR100, STL10-U, CelebA, and ImageNet">
+        <img src="timestep_stability.png" alt="AUC and attack success rate as a function of timestep t for CIFAR10, CIFAR100, STL10-U, CelebA, and ImageNet">
         <h3>Stability across timesteps</h3>
         <p>Smaller DDPM checkpoints hold a broad plateau of strong AUC/ASR across timesteps, while the larger ImageNet Guided Diffusion model is most vulnerable at early, low-noise timesteps.</p>
       </div>
