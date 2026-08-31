@@ -36,7 +36,7 @@
   a{color:inherit;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
 
-  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
 
   /* ---------- top bar ---------- */
   .topbar{
@@ -127,55 +127,59 @@
 
   /* ---------- idea / mechanism ---------- */
   .idea-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:36px;
-    align-items:center;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
   }
   .idea-grid figure{margin:0;}
+  .idea-grid figure img{width:100%; height:auto; display:block; border-radius:3px; background:#fff;}
   .idea-grid figcaption{
     font-size:13.5px;
     color:var(--ink-faint);
     margin-top:12px;
     line-height:1.5;
+    max-width:74ch;
   }
-  .idea-text p{font-size:15.5px; color:#c9cdd2; max-width:48ch;}
+  .idea-text p{font-size:15.5px; color:#c9cdd2; max-width:60ch;}
+  .idea-text{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:start;
+  }
   .legend{display:flex; gap:18px; margin-top:14px; font-size:13px; color:var(--ink-dim);}
   .legend span{display:inline-flex; align-items:center; gap:7px;}
   .swatch{width:10px; height:10px; border-radius:50%; display:inline-block;}
 
   @media (max-width:760px){
-    .idea-grid{grid-template-columns:1fr;}
+    .idea-text{grid-template-columns:1fr;}
   }
 
   /* ---------- results grid ---------- */
   .results-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
   }
   .result-card{
     border:1px solid var(--rule);
     border-radius:4px;
     background:var(--bg-raised);
-    padding:20px 20px 18px;
+    padding:22px 24px 24px;
   }
-  .result-card svg, .result-card img{width:100%; height:auto; display:block; border-radius:2px;}
-  .idea-grid figure img{width:100%; height:auto; display:block; border-radius:3px; background:#fff;}
+  .result-card svg, .result-card img{width:100%; height:auto; display:block; border-radius:2px; background:#fff;}
   .result-card h3{
     font-family:'Newsreader', serif;
     font-weight:500;
-    font-size:16.5px;
-    margin:16px 0 6px;
+    font-size:18px;
+    margin:18px 0 6px;
   }
   .result-card p{
-    font-size:13.5px;
+    font-size:14px;
     color:var(--ink-dim);
     margin:0;
-    line-height:1.55;
-  }
-  @media (max-width:760px){
-    .results-grid{grid-template-columns:1fr;}
+    line-height:1.6;
+    max-width:78ch;
   }
 
   /* ---------- citation ---------- */
@@ -303,17 +307,19 @@
           given noisy query, and the model's implicit reconstruction is the
           responsibility-weighted mean of the training set.
         </p>
-        <p>
-          Reconstruction error from this retrieval splits exactly into
-          <strong style="color:#e8a33d; font-weight:600;">bias</strong>
-          (distance from the posterior mean to the candidate) and
-          <strong style="color:#4c8dff; font-weight:600;">crowding</strong>
-          (dispersion of the responsible points). DIME estimates both from as
-          few as two forward queries to the network.
-        </p>
-        <div class="legend">
-          <span><span class="swatch" style="background:#4c8dff;"></span>training points</span>
-          <span><span class="swatch" style="background:#e8a33d; border:none;"></span>query / candidate</span>
+        <div>
+          <p>
+            Reconstruction error from this retrieval splits exactly into
+            <strong style="color:#e8a33d; font-weight:600;">bias</strong>
+            (distance from the posterior mean to the candidate) and
+            <strong style="color:#4c8dff; font-weight:600;">crowding</strong>
+            (dispersion of the responsible points). DIME estimates both from
+            as few as two forward queries to the network.
+          </p>
+          <div class="legend">
+            <span><span class="swatch" style="background:#4c8dff;"></span>training points</span>
+            <span><span class="swatch" style="background:#e8a33d; border:none;"></span>query / candidate</span>
+          </div>
         </div>
       </div>
     </div>
@@ -348,13 +354,13 @@
       </div>
 
       <div class="result-card">
-        <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
-          <line x1="30" y1="160" x2="340" y2="160" stroke="#262b33" stroke-width="1"/>
-          <path d="M30,50 C90,55 150,60 200,70 C250,80 300,95 340,110" fill="none" stroke="#e8a33d" stroke-width="2"/>
-          <path d="M30,150 C90,150 150,148 200,146 C250,144 300,142 340,140" fill="none" stroke="#5c6470" stroke-width="2" stroke-dasharray="4 3"/>
-          <text x="230" y="65" font-family="IBM Plex Mono, monospace" font-size="10" fill="#e8a33d">non-private</text>
-          <text x="230" y="158" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5c6470">DP-trained</text>
-          <text x="30" y="178" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5c6470">privacy budget &#8594;</text>
+        <svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30,28 C90,30 150,33 200,39 C250,44 300,52 340,60" fill="none" stroke="#e8a33d" stroke-width="2"/>
+          <path d="M30,83 C90,83 150,81 200,80 C250,79 300,78 340,77" fill="none" stroke="#5c6470" stroke-width="2" stroke-dasharray="4 3"/>
+          <line x1="30" y1="88" x2="340" y2="88" stroke="#262b33" stroke-width="1"/>
+          <text x="230" y="36" font-family="IBM Plex Mono, monospace" font-size="10" fill="#e8a33d">non-private</text>
+          <text x="230" y="87" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5c6470">DP-trained</text>
+          <text x="30" y="103" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5c6470">privacy budget &#8594;</text>
         </svg>
         <h3>Under differential privacy</h3>
         <p>Against differentially private training, DIME's advantage &mdash; like prior attacks' &mdash; is driven back toward chance, consistent with what DP is meant to guarantee.</p>
